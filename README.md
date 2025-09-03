@@ -1,107 +1,99 @@
-# Lung Cancer Mortality Prediction
+# Breast Cancer Prediction
 
----
+## Executive Summary  
 
-## Executive Summary
+Breast cancer is one of the most common cancers worldwide and a leading cause of cancer-related deaths among women.  
+According to the **World Health Organization (WHO)**, breast cancer accounts for approximately **685,000 deaths each year**. Early detection and accurate diagnosis are critical in improving survival rates and treatment outcomes.  
 
-Lung cancer is one of the most aggressive and deadly forms of cancer, with a high mortality rate worldwide.  
-According to the **World Health Organization (WHO)**, lung cancer is responsible for approximately **1.8 million deaths every year**, making it the leading cause of cancer-related deaths globally.  
-
-Identifying factors that influence lung cancer mortality is critical in healthcare — not only for early intervention, but also for tailoring treatment plans to improve patient survival outcomes. Understanding which clinical, demographic, and lifestyle features are most strongly associated with mortality can help medical professionals make better-informed decisions.
+The central challenge lies in distinguishing between **benign** (non-cancerous) and **malignant** (cancerous) tumors based on measurable attributes of the tumor. Reliable classification can assist medical professionals in decision-making, reduce unnecessary interventions, and prioritize high-risk cases.  
 
 **Problem Space:**  
-Patients diagnosed with lung cancer face varying prognoses. While some recover fully, others succumb despite treatment. The challenge lies in predicting patient outcomes based on available data at diagnosis and during treatment. This enables better risk stratification, targeted interventions, and improved allocation of healthcare resources.
+Given numeric measurements of breast tumor samples, can we accurately classify whether a tumor is benign or malignant?  
 
 **The Machine Learning Solution:**  
-This project uses supervised machine learning models to predict whether a lung cancer patient is likely to recover or die, based on their demographic, lifestyle, and clinical features. The model outputs both predictions and interpretable feature importance, allowing for transparency in decision-making.
+This project applies supervised machine learning models to classify tumors. By training on tumor characteristics (such as mean radius, texture, perimeter, area, and other derived features), the model predicts whether a given sample is malignant or benign. Feature importance and interpretability methods are also applied to ensure transparency in the decision-making process.  
 
 **Commercial Opportunity:**  
-Such predictive tools could be integrated into hospital decision-support systems, enabling:
-- Faster triage of high-risk patients.
-- Prioritization of follow-up testing and imaging.
-- Tailored patient monitoring programs.  
-This could potentially improve survival rates while reducing treatment costs through better resource allocation.
+Predictive models of this type could be integrated into **decision-support systems** for radiologists and oncologists, helping to:  
+- Assist in early diagnosis.  
+- Reduce diagnostic errors.  
+- Improve patient outcomes by enabling timely intervention.  
 
 ---
 
-## Data
+## Data  
 
 **What the data shows:**  
-The dataset contains records of patients diagnosed with lung cancer, including whether they recovered or died. Features include demographic details (age, gender), lifestyle factors (smoking history, alcohol consumption), environmental exposure (air pollution, dust allergy), and clinical indicators. The target variable is binary:  
-- **0:** Patient recovered  
-- **1:** Patient died  
+The dataset consists of **numeric measurements of breast tumor cells**, extracted from medical imaging. Each record corresponds to a tumor, with features describing its physical properties. The target variable is binary:  
+- **0:** Benign tumor  
+- **1:** Malignant tumor  
 
 **Source:**  
-The dataset was obtained from **[Dataset Author’s Name]** and is hosted on **[Kaggle link or data repository]**. All data is anonymized and provided for research and educational purposes only.
+The dataset used is the **Breast Cancer Wisconsin (Diagnostic) dataset**, widely available for research and educational purposes, hosted on [Kaggle](https://www.kaggle.com/datasets/uciml/breast-cancer-wisconsin-data).  
 
 ---
 
-## Methodology
+## Methodology  
 
-### Data Cleaning
-- Checked for and handled missing values (imputation for numerical features, mode replacement for categorical).
-- Encoded categorical variables using label encoding and one-hot encoding where appropriate.
-- Standardized or normalized numerical features to improve model convergence.
-- Removed duplicates and verified data consistency.
+### Data Cleaning  
+- Verified dataset integrity (no null values or duplicates).  
+- Confirmed numerical feature consistency and ranges.  
+- Standardized features for optimal model performance.  
 
-### Exploratory Data Analysis (EDA)
-- Summary statistics for all features.
-- Class distribution analysis to check for imbalance in survival outcomes.
-- Correlation analysis to identify relationships between features and the target variable.
-- Visualization of key patterns:
-  - Age distribution across recovery/death outcomes.
-  - Mortality rates across smoking history categories.
-  - Impact of environmental factors on survival.
+### Exploratory Data Analysis (EDA)  
+- Examined class distribution (benign vs malignant).  
+- Analyzed distributions of key numerical features.  
+- Explored correlations between features and the target.  
+- Visualized patterns in tumor characteristics (e.g., size, texture).  
 
----
+### Modeling Approach  
+- **Baseline Models:** Logistic Regression, Decision Tree.  
+- **Advanced Models:** Random Forest, Gradient Boosting (XGBoost), Support Vector Machines.  
+- **Model Selection:** Based on ROC-AUC, F1-score, precision, and recall.  
+- **Hyperparameter Tuning:** GridSearchCV for optimization.  
 
-### Modeling Approach
-- **Baseline Model:** Logistic Regression to establish a performance benchmark. Decision Tree for any improvement. 
-- **Advanced Models:** Random Forest, Gradient Boosting (XGBoost), and Support Vector Machines for performance improvement.
-- **Model Selection:** Based on ROC-AUC, F1-score, recall, and precision.
-- **Hyperparameter Tuning:** GridSearchCV for optimal performance.
-
----
-
-### Evaluation Metrics
-Given the high cost of false negatives in healthcare (predicting survival when death is likely), priority was given to:
-- **Recall (Sensitivity)**
-- **F1-score**
+### Evaluation Metrics  
+Given the high cost of false negatives in cancer detection (classifying malignant as benign), the following metrics are prioritized:  
+- **Recall (Sensitivity)**  
+- **F1-score**  
 - **ROC-AUC**  
-Confusion matrices were used to visualize classification performance.
+Confusion matrices are used to visualize performance.  
+
+### Model Interpretability  
+- **Feature Importance Analysis:** Identified top predictors of malignancy.  
+- **SHAP Values:** Provided feature-level explanations for predictions.  
+- **Ethical Considerations:** Highlighted importance of human oversight.  
 
 ---
 
-### Model Interpretability
-- **Feature Importance Analysis:** Identified top predictors of mortality.
-- **SHAP Values:** Provided feature-level explanations for individual predictions.
-- **Ethical Considerations:** Discussed potential biases in model predictions and the importance of human oversight in clinical use.
-
----
-
-## Results Summary
+## Results Summary  
 > _(To be updated after model training)_  
-- Best performing model: **XGBoost Classifier**
-- ROC-AUC: **[Value]**
-- F1-score: **[Value]**
-- Top predictors of mortality: **[Feature 1]**, **[Feature 2]**, **[Feature 3]**
+- Best performing model: **[Model]**  
+- ROC-AUC: **[Value]**  
+- F1-score: **[Value]**  
+- Top predictors of malignancy: **[Feature 1]**, **[Feature 2]**, **[Feature 3]**  
 
 ---
 
-## Limitations
-- Dataset size limits generalizability.
-- Potential biases due to demographic or regional sampling.
-- Model not suitable for direct clinical use — for research and educational purposes only.
+## Limitations  
+- Dataset size and scope limit generalizability.  
+- Synthetic balance in classes may not fully represent real-world scenarios.  
+- For educational purposes only — **not suitable for clinical deployment**.  
 
 ---
 
-## Future Work
-- Incorporate time-to-event data for survival analysis.
-- Test on larger, multi-center datasets.
-- Integrate with external datasets (air quality, socio-economic indicators) for improved predictions.
+## Future Work  
+- Explore deep learning approaches (e.g., neural networks).  
+- Apply survival analysis on longitudinal breast cancer datasets.  
+- Validate on larger, real-world, multi-center datasets.  
 
 ---
 
-## Acknowledgments
-- Dataset by **[Author]**, sourced from **[Link]**.
-- WHO statistics from [https://www.who.int/news-room/fact-sheets/detail/cancer](https://www.who.int/news-room/fact-sheets/detail/cancer).
+## Acknowledgments  
+- Dataset by **UCI Machine Learning Repository**, available via Kaggle.  
+- WHO statistics from [https://www.who.int/news-room/fact-sheets/detail/cancer](https://www.who.int/news-room/fact-sheets/detail/cancer).  
+
+---
+
+## Note on Project History  
+This repository originally began as a **lung cancer mortality prediction project**, which explored demographic, lifestyle, and clinical features. During exploratory data analysis, it was determined that the dataset was **synthetic and lacked predictive signal**. Those initial notebooks have been moved to the `archive/` folder for transparency but are not part of the final analysis. The project has since pivoted to focus on **breast cancer tumor classification**, which provides a stronger foundation for demonstrating machine learning workflows.  
